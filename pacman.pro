@@ -3,6 +3,16 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
+LIBS += -L"C:\Qt\SFML-2.3.2\lib"
+
+CONFIG(release, debug|release):
+LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
+
+CONFIG(debug, debug|release):
+LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-main-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+
+INCLUDEPATH += "C:\Qt\SFML-2.3.2\include"
+
 SOURCES += main.cpp \
     bomg.cpp \
     game_types.cpp \
@@ -13,39 +23,8 @@ SOURCES += main.cpp \
     score.cpp \
     tools.cpp
 
-message($$PWD)
-SFML_PATH= $$PWD/../3rdparty/SFML-2.6.0
-message($$SFML_PATH)
-INCLUDEPATH += $$SFML_PATH/include
-LIBS += -L$$SFML_PATH/lib -lFLAC \
-                         -lfreetype \
-                         -logg \
-                         -lopenal32 \
-                         -lsfml-audio-d \
-                         -lsfml-audio-s-d \
-                         -lsfml-audio-s \
-                         -lsfml-audio \
-                         -lsfml-graphics-d \
-                         -lsfml-graphics-s-d \
-                         -lsfml-graphics-s \
-                         -lsfml-graphics \
-                         -lsfml-main-d \
-                         -lsfml-main \
-                         -lsfml-network-d \
-                         -lsfml-network-s-d \
-                         -lsfml-network-s \
-                         -lsfml-network \
-                         -lsfml-system-d \
-                         -lsfml-system-s-d \
-                         -lsfml-system-s \
-                         -lsfml-system \
-                         -lsfml-window-d \
-                         -lsfml-window-s-d \
-                         -lsfml-window-s \
-                         -lsfml-window \
-                         -lvorbis \
-                         -lvorbisenc \
-                         -lvorbisfile
+include(deployment.pri)
+qtcAddDeployment()
 
 HEADERS += \
     bomg.h \
